@@ -81,8 +81,7 @@ script:
   
   #	PHP tests
   - cd ../
-  - mysql -e "use biocore; SELECT * FROM ngs_runparams;" -uroot
-  - mysql -e "use biocore; SELECT * FROM report_list;" -uroot
+  - mysql -e "use biocore; UPDATE ngs_runparams SET json_parameters = '3pl8cmzYJ4ezgX2a9RevZxHmihpOA' WHERE id = 1;" -uroot
   - phpunit unitTesting/ajax/tablegenerator_unittest.php
   - phpunit unitTesting/ajax/statquerydb_unittest.php
   - phpunit unitTesting/ajax/sessionrequests_unittest.php
