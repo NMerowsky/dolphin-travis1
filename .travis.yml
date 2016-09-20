@@ -37,7 +37,7 @@ before_script:
   - sudo service apache2 restart
   # dolphin repos
   - git clone --branch=2016_08_17_travisupdate https://github.com/Rhaknam/dolphin-tools.git /home/travis/build/dolphin_tools
-  - git clone https://github.com/UMMS-Biocore/dolphin-bin.git /home/travis/build/dolphin-bin
+  - git clone https://github.com/UMMS-Biocore/dolphin-bin.git /usr/local/bin/dolphin-bin
   - git clone https://github.com/UMMS-Biocore/dolphin-genome-data.git /home/travis/build/dolphin-genome-data
   - sudo mkdir -p /home/travis/build/pub /home/travis/build/logs tmp/files tmp/logs tmp/logs/run4 tmp/logs/run5 tmp/logs/run6 tmp/logs/run7 tmp/logs/run8
   - sudo ln -s $(pwd) /var/www/dolphin
@@ -55,7 +55,7 @@ before_script:
   - sudo mysql -e "use biocore; UPDATE ngs_samples set samplename = name;" -uroot
   - sudo mysql -e "use biocore; INSERT INTO amazon_credentials ( aws_access_key_id, aws_secret_access_key, bucket ) VALUES ( 'test_access', 'test_secret', 'test_bucket' );" -uroot
   - sudo mysql -e "use biocore; INSERT INTO ngs_organism (organism, organism_symbol) VALUES ('mousetest', 'mm10'); UPDATE ngs_samples SET organism_id = 1;" -uroot
-  - PATH=$PATH:/home/travis/build/dolphin-bin
+  - export PATH=$PATH:/usr/local/bin/dolphin-bin
   - DOLPHIN_PARAMS_SECTION=Travis
 
 script:
@@ -66,32 +66,31 @@ script:
   - sudo mysql --user=bioinfo --password=bioinfo2013 biocore < db/travis.sql
   #	Run workflow
   - cd scripts
-  - travis_wait 20 python dolphin_wrapper.py -r 4 -c Travis
-  - tree /home/travis/build/testrun1/
+  - travis_wait 10 python dolphin_wrapper.py -r 4 -c Travis
   - sudo ../unitTesting/run_insertion.sh
   
   #	Non-params
   - travis_wait 30 python dolphin_wrapper.py -r 5 -c Travis
   
-  #- phpunit unitTesting/ajax/tablegenerator_unittest.php
-  #- phpunit unitTesting/ajax/statquerydb_unittest.php
-  #- phpunit unitTesting/ajax/sessionrequests_unittest.php
-  #- phpunit unitTesting/ajax/profiledb_unittest.php
-  #- phpunit unitTesting/ajax/ngsquerydb_unittest.php
-  #- phpunit unitTesting/ajax/ngsfastlanedb_unittest.php
-  #- phpunit unitTesting/ajax/ngs_tables_unittest.php
-  #- phpunit unitTesting/ajax/kill_pid_unittest.php
-  #- phpunit unitTesting/ajax/initialmappingdb_unittest.php
-  #- phpunit unitTesting/ajax/dolphinfuncs_unittest.php
-  #- phpunit unitTesting/ajax/dataservice_unittest.php
-  #- phpunit unitTesting/ajax/datajobs_unittest.php
-  #- phpunit unitTesting/ajax/dataerrorlogs_unittest.php
-  #- phpunit unitTesting/ajax/dashboardquerydb_unittest.php
-  #- phpunit unitTesting/ajax/browse_edit_unittest.php
-  #- phpunit unitTesting/ajax/admindashboardquerydb_unittest.php
-  #- phpunit unitTesting/ajax/adminstatquerydb_unittest.php
+  - phpunit unitTesting/ajax/tablegenerator_unittest.php
+  - phpunit unitTesting/ajax/statquerydb_unittest.php
+  - phpunit unitTesting/ajax/sessionrequests_unittest.php
+  - phpunit unitTesting/ajax/profiledb_unittest.php
+  - phpunit unitTesting/ajax/ngsquerydb_unittest.php
+  - phpunit unitTesting/ajax/ngsfastlanedb_unittest.php
+  - phpunit unitTesting/ajax/ngs_tables_unittest.php
+  - phpunit unitTesting/ajax/kill_pid_unittest.php
+  - phpunit unitTesting/ajax/initialmappingdb_unittest.php
+  - phpunit unitTesting/ajax/dolphinfuncs_unittest.php
+  - phpunit unitTesting/ajax/dataservice_unittest.php
+  - phpunit unitTesting/ajax/datajobs_unittest.php
+  - phpunit unitTesting/ajax/dataerrorlogs_unittest.php
+  - phpunit unitTesting/ajax/dashboardquerydb_unittest.php
+  - phpunit unitTesting/ajax/browse_edit_unittest.php
+  - phpunit unitTesting/ajax/admindashboardquerydb_unittest.php
+  - phpunit unitTesting/ajax/adminstatquerydb_unittest.php
   #	api
-  #- phpunit unitTesting/api/funcs_unittest.php
+  - phpunit unitTesting/api/funcs_unittest.php
 
 after_script:
   - mysql -e "show databases;" -uroot
