@@ -81,6 +81,8 @@ script:
   
   #	PHP tests
   - cd ../
+  - mysql -e "use biocore; SELECT * FROM ngs_runparams;" -uroot
+  - mysql -e "use biocore; SELECT * FROM report_list;" -uroot
   - phpunit unitTesting/ajax/tablegenerator_unittest.php
   - phpunit unitTesting/ajax/statquerydb_unittest.php
   - phpunit unitTesting/ajax/sessionrequests_unittest.php
