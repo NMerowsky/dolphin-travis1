@@ -73,11 +73,11 @@ script:
   - sudo mysql --user=bioinfo --password=bioinfo2013 biocore < db/travis.sql
   #	Run workflow
   - cd scripts
-  - travis_wait 10 python dolphin_wrapper.py -r 4 -c Travis
+  #- travis_wait 10 python dolphin_wrapper.py -r 4 -c Travis
   - sudo ../unitTesting/run_insertion.sh
   
   #	Non-params
-  - travis_wait 30 python dolphin_wrapper.py -r 5 -c Travis
+  #- travis_wait 30 python dolphin_wrapper.py -r 5 -c Travis
   
   #	PHP tests
   - cd ../
