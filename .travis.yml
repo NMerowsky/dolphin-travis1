@@ -79,6 +79,8 @@ script:
   #	Non-params
   - travis_wait 30 python dolphin_wrapper.py -r 5 -c Travis
   
+  #	PHP tests
+  - cd ../
   - phpunit unitTesting/ajax/tablegenerator_unittest.php
   - phpunit unitTesting/ajax/statquerydb_unittest.php
   - phpunit unitTesting/ajax/sessionrequests_unittest.php
