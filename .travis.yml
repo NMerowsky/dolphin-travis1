@@ -83,6 +83,8 @@ script:
   - cd ../
   - phpunit unitTesting/ajax/statquerydb_unittest.php
   - phpunit unitTesting/ajax/sessionrequests_unittest.php
+  - mysql -e "use biocore; SELECT * FROM amazon_credentials;" -uroot
+  - mysql -e "use biocore; SELECT * FROM group_amazon;" -uroot
   - phpunit unitTesting/ajax/profiledb_unittest.php
   - phpunit unitTesting/ajax/ngsquerydb_unittest.php
   - phpunit unitTesting/ajax/ngsfastlanedb_unittest.php
