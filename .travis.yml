@@ -81,11 +81,10 @@ script:
   
   #	PHP tests
   - cd ../
+  - phpunit unitTesting/ajax/tablegenerator_unittest.php
   - phpunit unitTesting/ajax/statquerydb_unittest.php
   - phpunit unitTesting/ajax/sessionrequests_unittest.php
   - sudo mysql -e "use biocore; INSERT INTO amazon_credentials ( id, aws_access_key_id, aws_secret_access_key, bucket ) VALUES ( 1, 'test_access', 'test_secret', 'test_bucket' );" -uroot
-  - mysql -e "use biocore; SELECT * FROM amazon_credentials;" -uroot
-  - mysql -e "use biocore; SELECT * FROM group_amazon;" -uroot
   - phpunit unitTesting/ajax/profiledb_unittest.php
   - phpunit unitTesting/ajax/ngsquerydb_unittest.php
   - phpunit unitTesting/ajax/ngsfastlanedb_unittest.php
@@ -100,7 +99,6 @@ script:
   - phpunit unitTesting/ajax/browse_edit_unittest.php
   - phpunit unitTesting/ajax/admindashboardquerydb_unittest.php
   - phpunit unitTesting/ajax/adminstatquerydb_unittest.php
-  - phpunit unitTesting/ajax/tablegenerator_unittest.php
   #	api
   - phpunit unitTesting/api/funcs_unittest.php
 
