@@ -81,7 +81,6 @@ script:
   
   #	PHP tests
   - cd ../
-  - phpunit unitTesting/ajax/tablegenerator_unittest.php
   - phpunit unitTesting/ajax/statquerydb_unittest.php
   - phpunit unitTesting/ajax/sessionrequests_unittest.php
   - phpunit unitTesting/ajax/profiledb_unittest.php
@@ -98,6 +97,7 @@ script:
   - phpunit unitTesting/ajax/browse_edit_unittest.php
   - phpunit unitTesting/ajax/admindashboardquerydb_unittest.php
   - phpunit unitTesting/ajax/adminstatquerydb_unittest.php
+  - phpunit unitTesting/ajax/tablegenerator_unittest.php
   #	api
   - phpunit unitTesting/api/funcs_unittest.php
 
@@ -113,6 +113,7 @@ after_script:
   - mysql -e "use biocore; SELECT * FROM report_list;" -uroot
   - mysql -e "use biocore; SELECT * FROM ngs_createdtables;" -uroot
   - mysql -e "use biocore; SELECT * FROM amazon_credentials;" -uroot
+  - mysql -e "use biocore; SELECT * FROM group_amazon;" -uroot
   - mysql -e "use biocore; SELECT * FROM groups;" -uroot
   - mysql -e "use biocore; SELECT * FROM user_group_requests;" -uroot
   - mysql -e "use biocore; SELECT * FROM ngs_wkeylist;" -uroot
