@@ -67,7 +67,6 @@ before_script:
 
 script:
   #	ajax - initial mapping
-  
   - phpunit unitTesting/ngsimport_unittest.php
   - phpunit unitTesting/ajax/ngsalterdb_unittest.php
   - sudo mysql --user=bioinfo --password=bioinfo2013 biocore < db/travis.sql
@@ -75,7 +74,6 @@ script:
   - cd scripts
   - python dolphin_wrapper.py -r 4 -c Travis
   - sudo ../unitTesting/run_insertion.sh
-  
   #	Non-params
   - travis_wait 30 python dolphin_wrapper.py -r 5 -c Travis
 
