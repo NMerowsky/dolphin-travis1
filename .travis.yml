@@ -78,30 +78,6 @@ script:
   
   #	Non-params
   - travis_wait 30 python dolphin_wrapper.py -r 5 -c Travis
-  
-  #	PHP tests
-  - cd ../
-  - mysql -e "use biocore; UPDATE ngs_runparams SET wkey = '3pl8cmzYJ4ezgX2a9RevZxHmihpOA' WHERE id = 1;" -uroot
-  - phpunit unitTesting/ajax/tablegenerator_unittest.php
-  - phpunit unitTesting/ajax/statquerydb_unittest.php
-  - phpunit unitTesting/ajax/sessionrequests_unittest.php
-  - sudo mysql -e "use biocore; INSERT INTO amazon_credentials ( id, aws_access_key_id, aws_secret_access_key, bucket ) VALUES ( 1, 'test_access', 'test_secret', 'test_bucket' );" -uroot
-  - phpunit unitTesting/ajax/profiledb_unittest.php
-  - phpunit unitTesting/ajax/ngsquerydb_unittest.php
-  - phpunit unitTesting/ajax/ngsfastlanedb_unittest.php
-  - phpunit unitTesting/ajax/ngs_tables_unittest.php
-  - phpunit unitTesting/ajax/kill_pid_unittest.php
-  - phpunit unitTesting/ajax/initialmappingdb_unittest.php
-  - phpunit unitTesting/ajax/dolphinfuncs_unittest.php
-  - phpunit unitTesting/ajax/dataservice_unittest.php
-  - phpunit unitTesting/ajax/datajobs_unittest.php
-  - phpunit unitTesting/ajax/dataerrorlogs_unittest.php
-  - phpunit unitTesting/ajax/dashboardquerydb_unittest.php
-  - phpunit unitTesting/ajax/browse_edit_unittest.php
-  - phpunit unitTesting/ajax/admindashboardquerydb_unittest.php
-  - phpunit unitTesting/ajax/adminstatquerydb_unittest.php
-  #	api
-  - phpunit unitTesting/api/funcs_unittest.php
 
 after_script:
   - mysql -e "show databases;" -uroot
